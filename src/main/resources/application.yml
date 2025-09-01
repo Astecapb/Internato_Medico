@@ -1,0 +1,38 @@
+# src/main/resources/application.yml
+spring:
+  # Banco PostgreSQL
+  datasource:
+    url: jdbc:postgresql://localhost:5432/internato
+    username: postgres
+    password: post1234
+  jpa:
+    hibernate:
+      ddl-auto: validate        # usa Flyway – nunca cria tabelas via hbm2ddl
+    properties:
+      hibernate:
+        default_schema: public
+        format_sql: true
+  flyway:
+    baseline-on-migrate: true   # cria/executa scripts V1, V2, V3…
+    locations: classpath:db/migration
+
+  # Segurança (pode ser ajustado depois com JWT)
+  security:
+    user:
+      name: coord
+      password: 123
+
+  # Dev / Test
+  devtools:
+    restart:
+      enabled: true
+
+# Porta padrão
+server:
+  port: 8080
+
+# Logs úteis
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
